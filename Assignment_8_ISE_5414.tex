@@ -125,17 +125,17 @@ PID: rk126}
 	
 	Also, we know that,
 	
-	$Pr[System survives each shock] = \alpha$
+	Pr[System survives each shock] $= \alpha$
 	
-	$Pr[System survives k shocks] = \alpha^{k}$
+	Pr[System survives k shocks] $= \alpha^{k}$
 	
-	$Pr[System is surviving at time t] = \sum_k{Pr[System is surviving k shocks and k shocks have occured till time t]}$
+	Pr[System is surviving at time t] $$= \sum_k{Pr[N(shocks) = k \cap N(t) = k]}$$
 	
-	$Pr[System is surviving at time t] = \sum_k{Pr[System is surviving k shocks|k shocks have occurred till time t] Pr[k shocks have occurred till time t]}$
+	Pr[System is surviving at time t] $$= \sum_k{Pr[N(shocks) = k|N(t) = k] Pr[N(t) = k]}$$
 	
 	Therefore, Pr[System is surviving at time t]
 	
-	$$ = \sum_k{\alpha^k * \frac{(\lambda t)^k e^{-\lambda t}}{k!}}$$
+	$$ = \sum_k{\alpha^k \times \frac{(\lambda t)^k e^{-\lambda t}}{k!}}$$
 	
 	\item[5.1.9] We know that the Number of passengers arriving at the bus stop at time T, where T is a random variable  is a Poisson process and can be written as follows,
 	
