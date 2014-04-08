@@ -1,0 +1,212 @@
+%% Based on a TeXnicCenter-Template by Tino Weinkauf.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,oneside,12pt]{report}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[USenglish]{babel} %francais, polish, spanish, ...
+\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}
+
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+
+
+%% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%For loading graphic files
+%\usepackage{subfig} %%Subfigures inside a figure
+%\usepackage{pst-all} %%PSTricks - not useable with pdfLaTeX
+
+%% Please note:
+%% Images can be included using \includegraphics{Dateiname}
+%% resp. using the dialog in the Insert menu.
+%% 
+%% The mode "LaTeX => PDF" allows the following formats:
+%%   .jpg  .png  .pdf  .mps
+%% 
+%% The modes "LaTeX => DVI", "LaTeX => PS" und "LaTeX => PS => PDF"
+%% allow the following formats:
+%%   .eps  .ps  .bmp  .pict  .pntg
+
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+
+%% Line Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{setspace}
+%\singlespacing        %% 1-spacing (default)
+%\onehalfspacing       %% 1,5-spacing
+%\doublespacing        %% 2-spacing
+
+
+%% Other Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{a4wide} %%Smaller margins = more text per page.
+%\usepackage{fancyhdr} %%Fancy headings
+%\usepackage{longtable} %%For tables, that exceed one page
+\usepackage{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Remarks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% TODO:
+% 1. Edit the used packages and their options (see above).
+% 2. If you want, add a BibTeX-File to the project
+%    (e.g., 'literature.bib').
+% 3. Happy TeXing!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Options / Modifications
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\input{options} %You need a file 'options.tex' for this
+%% ==> TeXnicCenter supplies some possible option files
+%% ==> with its templates (File | New from Template...).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{empty} %No headings for the first pages.
+
+
+%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Write your text here or include other files.
+
+%% The simple version:
+\title{Assignment VIII ISE 5414}
+\author{Ramakrishnan Kalyanaraman\\
+VT ID: 905782081\\
+PID: rk126}
+%\date{} %%If commented, the current date is used.
+\maketitle
+
+\begin{enumerate}
+	\item[5.1.2] Let Min(t) be the Poisson process representing the minor defects over the length t. Let Maj(t) be the Poisson process representing the major defects over the length t.
+	
+	Now we want to calculate, $Pr[Min(t) + Maj(t) = k]$, where $X(t) = Min(t) + Maj(t)$ which represents number of defects, either major or minor, in the cable length of t.
+	
+	$Pr[Min(t) + Maj(t) = k]$ can be written as a convolution sum of $Min(t)$ and $Maj(t)$.
+	
+	$$Pr[Min(t) + Maj(t) = k] = \sum_{m = 0}^{t}{Pr[Min(t) = m] Pr[Maj(t) = k - m]}$$
+	
+	$$Pr[Min(t) + Maj(t) = k] = \sum_{m = 0}^{t}{\frac{(\alpha t)^m e^{-\alpha t}}{m!} \times \frac{(\beta t)^{k-m} e^{-\beta t}}{(k - m)!}}$$
+	
+	Multiplying and dividing by k! and taking all the "m" independent terms outside summation's scope.
+	
+	$$Pr[Min(t) + Maj(t) = k] = \frac{e^{-(\alpha + \beta)t}}{k!} \sum_{m = 0}^{t}{\frac{k!}{(k - m)! m!} (\alpha t)^m (\beta t)^{k - m}}$$
+	
+	This summation is actually a binomial theorem which leads to $(\alpha t + \beta t)^k$
+	
+	$$Pr[Min(t) + Maj(t) = k] = \frac{e^{-(\alpha + \beta)t}}{k!} (\alpha t + \beta t)^k$$
+	
+	$$Pr[X(t) = k] = \frac{e^{-(\alpha + \beta)t} [(\alpha + \beta)t]^k}{k!}$$
+	
+	Thus, proving that X(t) is a Poisson process of rate $(\alpha + \beta)$
+	
+	\item[5.1.7] Let k be the number of shocks that the system would have received till time t. Then,
+	
+	$$Pr[N(t) = k] = \frac{(\lambda t)^k e^{-\lambda t}}{k!}$$
+	
+	Also, we know that,
+	
+	$Pr[System survives each shock] = \alpha$
+	
+	$Pr[System survives k shocks] = \alpha^{k}$
+	
+	$Pr[System is surviving at time t] = \sum_k{Pr[System is surviving k shocks and k shocks have occured till time t]}$
+	
+	$Pr[System is surviving at time t] = \sum_k{Pr[System is surviving k shocks|k shocks have occurred till time t] Pr[k shocks have occurred till time t]}$
+	
+	Therefore, Pr[System is surviving at time t]
+	
+	$$ = \sum_k{\alpha^k * \frac{(\lambda t)^k e^{-\lambda t}}{k!}}$$
+	
+	\item[5.1.9] We know that the Number of passengers arriving at the bus stop at time T, where T is a random variable  is a Poisson process and can be written as follows,
+	
+	$$Pr[X(T) = k|T = t] = \frac{(\lambda t)^k e^{-\lambda t}}{k!}$$
+	
+	$$Pr[X(T) = k|T = t] = \frac{(2 t)^k e^{-2 t}}{k!}$$
+	
+	Therefore, $$E[X(T)|T = t] = 2$$
+	
+	$$E[X(T)^2|T = t] = Var[X(T)|T = t] + E[X(T)|T = t]^2 = 2 + 2^2 = 6$$
+	
+	$$Pr[X(t) = k] = \int_{-\infty}^{\infty}{Pr[X(T) = k|T = t] f_T(t) dt}$$
+	
+	We know that,
+	
+	\[f_T(t) = \left\{ 
+  \begin{array}{l l}
+    1 & \quad \text{for $0 \leq t \leq 1$}\\
+    0 & \quad \text{elsewhere}
+  \end{array} \right.\]
+	
+	Therefore,
+	
+	$$Pr[X(t) = k] = \int_0^1{Pr[X(T) = k|T = t] dt}$$
+	
+	$$Pr[X(t) = k] = \int_0^1{\frac{(2 t)^k e^{-2 t}}{k!} dt}$$
+	
+	$$Pr[X(t) = k] = \frac{\Gamma(k + 1) - \Gamma(k + 1, 2)}{2k!} dt$$
+	
+	\item[5.1.12] We know that,
+	
+	$$Pr[X'(t) = j] = \int_0^{\infty}\frac{(\theta t)^k e^{-\theta t}}{k!} f(\theta) d\theta$$
+	
+	We are given,
+	
+	$f(\theta) = e^{-\theta}$ for $\theta > 0$
+	
+	$$Pr[X'(t) = j] = \int_0^{\infty}\frac{(\theta t)^k e^{-\theta t}}{k!} e^{-\theta} d\theta$$
+
+	Solving this integral, we obtain,
+	
+	$$Pr[X'(t) = j] = \left(\frac{t}{1 + t}\right)^j \left(\frac{1}{1 + t}\right)$$
+	
+	For j = 0, 1, ...
+	
+	\item[5.2.1] We write the binomial distribution of $Pr[X(n, p) = 0]$ as,
+	
+	$$ Pr[X(n, p) = 0] = {n \choose 0} p^0 (1-p)^{n - 0} $$
+	
+	$$ Pr[X(n, p) = 0] = (1-p)^n $$
+	
+	We are given that, $np = \lambda$ i.e. $p = \lambda/n$
+	
+	$$ Pr[X(n, p) = 0] = \left(1-\frac{\lambda}{n}\right)^n $$
+
+	Now, taking limit of n tending towards infinity on both sides,
+	
+	$$ \lim_{n\to\infty} Pr[X(n, p) = 0] = \lim_{n\to\infty} \left(1-\frac{\lambda}{n}\right)^n $$
+	
+	$$ \lim_{n\to\infty} Pr[X(n, p) = 0] = e^{-\lambda}$$
+	
+	Hence proved!
+	
+	In the second part,
+	
+	$$\frac{Pr[X(n, p) = k + 1]}{Pr[X(n, p) = k]} = \frac{{n \choose k + 1} p^{k + 1} (1 - p)^{n - k - 1}}{{n \choose k} p^{k} (1 - p)^{n - k}}$$
+	
+	On applying limit on both side with n tending towards infinity, we can get the desired output.
+	
+	$$\lim_{n\to\infty} \frac{Pr[X(n, p) = k + 1]}{Pr[X(n, p) = k]} = \frac{\lambda}{k + 1}$$
+	
+\end{enumerate}
+
+\end{document}
